@@ -16,9 +16,9 @@ class UsersTest(unittest.TestCase):
         self.app = create_app("testing")
         self.client = self.app.test_client
         self.user = {
-            'name': 'enforcer20',
-            'email': 'enforcer20@mail.com',
-            'password': 'passw0rd!'
+            'name': 'johnsaleena',
+            'email': 'johnsaleena@mail.com',
+            'password': 'pa55word!'
         }
 
         with self.app.app_context():
@@ -47,8 +47,8 @@ class UsersTest(unittest.TestCase):
     def test_user_creation_with_no_password(self):
         """ test user creation with no password"""
         user1 = {
-            'name': 'enforcer20',
-            'email': 'enforcer201@mail.com',
+            'name': 'johnsaleena',
+            'email': 'johnsaleena@mail.com',
         }
         res = self.client().post('/api/v1/users/', headers={'Content-Type': 'application/json'}, data=json.dumps(user1))
         json_data = json.loads(res.data)
@@ -87,8 +87,8 @@ class UsersTest(unittest.TestCase):
     def test_user_login_with_invalid_password(self):
         """ User Login Tests with invalid credentials """
         user1 = {
-            'password': 'enforcer20',
-            'email': 'enforcer20@mail.com',
+            'password': 'johnsaleena',
+            'email': 'johnsaleena@mail.com',
         }
         res = self.client().post('/api/v1/users/', headers={'Content-Type': 'application/json'},
                                  data=json.dumps(self.user))
@@ -103,8 +103,8 @@ class UsersTest(unittest.TestCase):
     def test_user_login_with_invalid_email(self):
         """ User Login Tests with invalid credentials """
         user1 = {
-            'password': 'passw0rd!',
-            'email': 'enforcer20@mail.com',
+            'password': 'pa55word!',
+            'email': 'johnsalena@mail.com',
         }
         res = self.client().post('/api/v1/users/', headers={'Content-Type': 'application/json'},
                                  data=json.dumps(self.user))
@@ -126,8 +126,8 @@ class UsersTest(unittest.TestCase):
                                 headers={'Content-Type': 'application/json', 'api-token': api_token})
         json_data = json.loads(res.data)
         self.assertEqual(res.status_code, 200)
-        self.assertEqual(json_data.get('email'), 'enforcer20@mail.com')
-        self.assertEqual(json_data.get('name'), 'enforcer20')
+        self.assertEqual(json_data.get('email'), 'johnsaleena@mail.com')
+        self.assertEqual(json_data.get('name'), 'johnsaleena')
 
     def test_user_update_me(self):
         """ Test User Update Me """
